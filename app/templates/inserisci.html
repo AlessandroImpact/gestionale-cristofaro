@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Insertar Caja{% endblock %}
+
+{% block content %}
+<h1>Insertar Nueva Caja</h1>
+<form method="post" action="{{ url_for('inserisci') }}">
+    <div class="mb-3">
+        <label for="lotto" class="form-label">Lote</label>
+        <input type="text" class="form-control" id="lotto" name="lotto" required>
+    </div>
+    <div class="mb-3">
+        <label for="data" class="form-label">Fecha</label>
+        <input type="date" class="form-control" id="data" name="data" required>
+    </div>
+    <div class="mb-3">
+        <label for="numero_scatola" class="form-label">Número de Caja</label>
+        <input type="number" class="form-control" id="numero_scatola" name="numero_scatola" required>
+    </div>
+    <div class="mb-3">
+        <label for="prima_scelta" class="form-label">Primera Elección (kg)</label>
+        <input type="number" step="0.01" class="form-control" id="prima_scelta" name="prima_scelta" required>
+    </div>
+    <div class="mb-3">
+        <label for="seconda_scelta" class="form-label">Segunda Elección (kg)</label>
+        <input type="number" step="0.01" class="form-control" id="seconda_scelta" name="seconda_scelta" required>
+    </div>
+    <div class="mb-3">
+        <label for="trosos" class="form-label">Trosos (kg)</label>
+        <input type="number" step="0.01" class="form-control" id="trosos" name="trosos" required>
+    </div>
+    <div class="mb-3">
+        <label for="scarti" class="form-label">Desperdicios (kg)</label>
+        <input type="number" step="0.01" class="form-control" id="scarti" name="scarti" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Insertar</button>
+</form>
+{% endblock %}

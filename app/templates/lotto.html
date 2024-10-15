@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Lote {{ lotto }}{% endblock %}
+
+{% block content %}
+<h1>Cajas del Lote {{ lotto }}</h1>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Fecha</th>
+            <th>Número de Caja</th>
+            <th>Primera Elección (kg)</th>
+            <th>Segunda Elección (kg)</th>
+            <th>Trosos (kg)</th>
+            <th>Desperdicios (kg)</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for scatola in scatole %}
+        <tr>
+            <td>{{ scatola.data.strftime('%d/%m/%Y') }}</td>
+            <td>{{ scatola.numero_scatola }}</td>
+            <td>{{ scatola.prima_scelta }}</td>
+            <td>{{ scatola.seconda_scelta }}</td>
+            <td>{{ scatola.trosos }}</td>
+            <td>{{ scatola.scarti }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

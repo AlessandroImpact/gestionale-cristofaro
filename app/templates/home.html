@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Cajas{% endblock %}
+
+{% block content %}
+<h1>Lista de Cajas</h1>
+<a href="{{ url_for('inserisci') }}" class="btn btn-primary mb-3">Insertar Caja</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Fecha</th>
+            <th>Lote</th>
+            <th>Número de Caja</th>
+            <th>Primera Elección (kg)</th>
+            <th>Segunda Elección (kg)</th>
+            <th>Trosos (kg)</th>
+            <th>Desperdicios (kg)</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for scatola in scatole %}
+        <tr>
+            <td>{{ scatola.data.strftime('%d/%m/%Y') }}</td>
+            <td><a href="{{ url_for('visualizza_lotto', lotto=scatola.lotto) }}">{{ scatola.lotto }}</a></td>
+            <td>{{ scatola.numero_scatola }}</td>
+            <td>{{ scatola.prima_scelta }}</td>
+            <td>{{ scatola.seconda_scelta }}</td>
+            <td>{{ scatola.trosos }}</td>
+            <td>{{ scatola.scarti }}</td>
+            <td>
+                <form action="{{ url_for('elimina_scatola', scatola_id=scatola.id) }}" method="post" onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta caja?');">
+                    <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

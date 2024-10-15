@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title %}Métricas{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Panel de Métricas</h1>
+
+<div class="row">
+    <!-- Card Trufas Llegadas -->
+    <div class="col-md-6">
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h4 class="my-0">Trufas Llegadas</h4>
+            </div>
+            <div class="card-body">
+                <!-- Form per selezionare l'intervallo di date -->
+                <form method="get" action="{{ url_for('metriche') }}">
+                    <div class="mb-3">
+                        <label for="data_inizio_arrivati" class="form-label">Fecha de Inicio</label>
+                        <input type="date" class="form-control" name="data_inizio_arrivati" id="data_inizio_arrivati" value="{{ data_inizio_arrivati }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="data_fine_arrivati" class="form-label">Fecha de Fin</label>
+                        <input type="date" class="form-control" name="data_fine_arrivati" id="data_fine_arrivati" value="{{ data_fine_arrivati }}">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Filtrar</button>
+                </form>
+                {% if total_arrivati is not none %}
+                <h5 class="mt-4">Cantidad Total (kg): <strong>{{ total_arrivati }}</strong></h5>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Card Trufas Vendidas -->
+    <div class="col-md-6">
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header bg-success text-white">
+                <h4 class="my-0">Trufas Vendidas</h4>
+            </div>
+            <div class="card-body">
+                <!-- Form per selezionare l'intervallo di date -->
+                <form method="get" action="{{ url_for('metriche') }}">
+                    <div class="mb-3">
+                        <label for="data_inizio_venduti" class="form-label">Fecha de Inicio</label>
+                        <input type="date" class="form-control" name="data_inizio_venduti" id="data_inizio_venduti" value="{{ data_inizio_venduti }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="data_fine_venduti" class="form-label">Fecha de Fin</label>
+                        <input type="date" class="form-control" name="data_fine_venduti" id="data_fine_venduti" value="{{ data_fine_venduti }}">
+                    </div>
+                    <button type="submit" class="btn btn-success">Filtrar</button>
+                </form>
+                {% if total_venduti is not none %}
+                <h5 class="mt-4">Cantidad Total (kg): <strong>{{ total_venduti }}</strong></h5>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Card Clientes Top -->
+<div class="card mb-4 shadow-sm">
+    <div class="card-header bg-info text-white">
+        <h4 class="my-0">Clientes Top</h4>
+    </div>
+    <div class="card-body">
+        {% if clienti_ordinati %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Cliente</th>
+                    <th>Cantidad Comprada (kg)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cliente, totale_peso in clienti_ordinati %}
+                <tr>
+                    <td>{{ cliente }}</td>
+                    <td>{{ totale_peso }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No hay datos disponibles.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
